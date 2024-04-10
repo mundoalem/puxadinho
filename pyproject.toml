@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "puxadinho"
+version = "0.1.0"
+description = "A framework for command line applications"
+authors = ["Egon Braun <egon@mundoalem.io>"]
+license = "GNU Affero General Public Licence Version 3"
+readme = "README.md"
+packages = [
+    { include = "src/**/*.py" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.scripts]
+cli = "src.cli:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
