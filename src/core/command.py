@@ -25,16 +25,17 @@ class Command:
         if not getattr(self, "subcommands", None):
             self.subcommands = []
 
-        self.args = None
         self.children = []
-        self.parent = None
+        self.parent = parent
         self.parser = parent.subparser.add_parser(
             name=self.name,
             description=self.description,
         )
 
-        self.subparser = self.parser.add_subparsers()
         self.parser.set_defaults(runfunc=self.run)
+
+        if len(self.subcommands) > 0:
+            self.subparser = self.parser.add_subparsers()
 
     @property
     def children(self) -> list[Command]:

@@ -3,17 +3,17 @@
 # ######################################################################################################################
 
 #
-# This file is part of puxadinho.
+# This file is part of skibidi.
 #
-# The puxadinho is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
+# The skibidi is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
 # General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your
 # option) any later version.
 #
-# The puxadinho is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+# The skibidi is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
 # details.
 #
-# You should have received a copy of the GNU Affero General Public License along with puxadinho. If not, see
+# You should have received a copy of the GNU Affero General Public License along with skibidi. If not, see
 # <https://www.gnu.org/licenses/>.
 #
 
@@ -74,6 +74,10 @@ USER root
 RUN export DEBIAN_FRONTEND="noninteractive" \
     && apt-get update \
     && apt-get -y install --no-install-recommends \
+    bats \
+    bats-assert \
+    bats-file \
+    bats-support \
     build-essential \
     && apt-get autoremove -y \
     && apt-get clean autoclean -y \

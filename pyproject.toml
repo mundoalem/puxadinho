@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "puxadinho"
+name = "skibidi"
 version = "0.1.0"
-description = "A framework for command line applications"
+description = "A Python micro-framework to build applications"
 authors = ["Egon Braun <egon@mundoalem.io>"]
 license = "GNU Affero General Public Licence Version 3"
 readme = "README.md"
@@ -11,6 +11,9 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
 
 [tool.poetry.scripts]
 cli = "src.cli:run"
