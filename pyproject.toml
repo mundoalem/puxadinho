@@ -16,7 +16,7 @@ build-backend = "pdm.backend"
 exclude_dirs = ["tests"]
 tests = []
 skips = [
-    "B101", # Use of assert detected
+  "B101", # Use of assert detected
 ]
 
 [tool.pdm]

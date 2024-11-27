@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 tasks:
   lint:
@@ -11,11 +11,14 @@ tasks:
       - pdm run bandit -c pyproject.toml -r src/
   setup:
     cmds:
-      - pdm python install
+      - pdm python install 3.13
+      - pdm python install 3.12
+      - pdm python install 3.11
+      - pdm venv create --force 3.13
       - pdm install --dev
+      - pdm install -G test
       - pdm install
   test:
     cmds:
       - pdm install -G test
-      - pdm run tox -p all
-
+      - pdm run tox run-parallel

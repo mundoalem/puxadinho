@@ -1,3 +1,3 @@
-# Skibidi
+# teenycli
 
-A Python microframework to build command line applications and system services.
+A **teeny** tiny Python framework to build CLI applications and system services.
