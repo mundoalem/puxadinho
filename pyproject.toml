@@ -1,7 +1,7 @@
 [project]
 name = "teenycli"
 version = "0.1.0"
-description = "A teeny tiny framework to build CLI apps."
+description = "A teeny tiny framework to build CLI apps and system services."
 authors = [{ name = "Egon Braun", email = "egon@mundoalem.io" }]
 dependencies = []
 requires-python = ">=3.11"
