@@ -1,10 +1,9 @@
-from typing import Optional
 
 from .exceptions import AppError
 
 
 class Result:
-    error: Optional[AppError] = None
+    error: AppError | None = None
     exit_code: int = 0
     output: str = ""
 
@@ -12,7 +11,7 @@ class Result:
         self,
         output: str = "",
         exit_code: int = 0,
-        error: Optional[AppError] = None,
+        error: AppError | None = None,
     ) -> None:
         self.error = error
         self.exit_code = exit_code

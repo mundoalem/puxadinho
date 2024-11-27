@@ -7,10 +7,7 @@ from typing import Any
 class Context:
     @classmethod
     def from_dict(cls, variables: dict[str, Any], context: Context = None) -> Context:
-        if not context:
-            context = cls()
-        else:
-            context = deepcopy(context)
+        context = cls() if not context else deepcopy(context)
 
         for key, value in variables.items():
             match value:
@@ -25,3 +22,4 @@ class Context:
                     continue
 
         return context
+

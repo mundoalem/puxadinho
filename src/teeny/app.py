@@ -1,9 +1,8 @@
 import argparse
 import re
+import tomllib
 from os import environ
 from pathlib import Path
-
-import tomllib
 
 from .command import Command
 from .context import Context
@@ -17,7 +16,7 @@ class App(Command):
     name: str
     description: str
     flags: list[Flag]
-    config_path: str
+    config_path: Path
     subcommands: list[type[Command]]
 
     def __init__(self) -> None:
@@ -25,17 +24,22 @@ class App(Command):
             raise NotFoundError("Application name was not found")
 
         if not getattr(self, "description", None):
-            raise NotFoundError("Application description was not found")
+            self.description = f"{self.name} command"
 
         if not getattr(self, "flags", None):
             self.flags = []
 
         if not getattr(self, "config_path", None):
-            self.config_paths = [
+            self.config_path = None
+
+            for config_path in [
                 Path(f"./{self.name}.toml").absolute(),
                 Path(f"~/.config/{self.name}/{self.name}.toml").expanduser().absolute(),
                 Path(f"/etc/{self.name}/{self.name}.toml"),
-            ]
+            ]:
+                if config_path.is_file():
+                    self.config_path = config_path
+                    break
 
         if not getattr(self, "subcommands", None):
             self.subcommands = []
@@ -53,8 +57,17 @@ class App(Command):
     def _default(self, _: Context) -> Result:
         return Result()
 
-    def run(self, flags: list[str] = []) -> None:
+    def run(self, flags: list[str] = None) -> None:
         envvars = {}
+        flags = flags if flags else []
+
+        config = {}
+
+        if self.config_path:
+            with open(self.config_path.as_posix(), "rb") as f:
+                config = tomllib.load(f)
+
+        context = Context.from_dict(variables=config)
         pattern = re.compile(f"^{self.name.upper()}_(.+)$")
 
         for name, value in environ.items():
@@ -64,15 +77,8 @@ class App(Command):
                 key = match.group(1).lower()
                 envvars[key] = value
 
-        context = Context.from_dict(variables=envvars)
-        config = {}
-        config_path = Path(self.config_path).expanduser().absolute()
+        context = Context.from_dict(variables=envvars, context=context)
 
-        if config_path.is_file():
-            with open(config_path.as_posix(), "rb") as f:
-                config = tomllib.load(f)
-
-        context = Context.from_dict(variables=config, context=context)
         args = vars(
             self.parser.parse_args()
             if len(flags) == 0
@@ -80,8 +86,10 @@ class App(Command):
         )
 
         runfunc = args["runfunc"]
+
         del args["runfunc"]
-        context = Context.from_dict(variables=args)
+
+        context = Context.from_dict(variables=args, context=context)
         result = runfunc(context)
 
         View.as_text(result)

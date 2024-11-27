@@ -17,7 +17,7 @@ class Command:
             raise NotFoundError("Application name was not found")
 
         if not getattr(self, "description", None):
-            raise NotFoundError("Application description was not found")
+            self.description = f"{self.name} command"
 
         if not getattr(self, "flags", None):
             self.flags = []

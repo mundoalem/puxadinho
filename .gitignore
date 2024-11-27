@@ -88,7 +88,8 @@ dmypy.json
 # macOS
 .DS_Store
 
-# Project
-container/devcontainer/volumes/history/*
-!container/devcontainer/volumes/history/.gitkeep
+# pdm
+.pdm-python
 
+# devbox
+devbox.lock

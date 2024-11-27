@@ -1,23 +1,29 @@
-[tool.poetry]
-name = "skibidi"
+[project]
+name = "teenycli"
 version = "0.1.0"
-description = "A Python micro-framework to build applications"
-authors = ["Egon Braun <egon@mundoalem.io>"]
-license = "GNU Affero General Public Licence Version 3"
+description = "A teeny tiny framework to build CLI apps."
+authors = [{ name = "Egon Braun", email = "egon@mundoalem.io" }]
+dependencies = []
+requires-python = ">=3.11"
 readme = "README.md"
-packages = [
-    { include = "src/**/*.py" }
-]
-
-[tool.poetry.dependencies]
-python = "^3.12"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.0"
-
-[tool.poetry.scripts]
-cli = "src.cli:run"
+license = { text = "AGPLv3" }
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+tests = []
+skips = [
+    "B101", # Use of assert detected
+]
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+test = ["tox>=4.23.2"]
+scan = ["bandit>=1.7.10"]
+lint = ["ruff>=0.8.0"]
+dev = ["pytest>=8.3.3"]
