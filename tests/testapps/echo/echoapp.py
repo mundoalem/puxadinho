@@ -1,7 +1,7 @@
-from teeny.app import App
-from teeny.command import Command
-from teeny.context import Context
-from teeny.result import Result
+from teenycli.app import App
+from teenycli.command import Command
+from teenycli.context import Context
+from teenycli.result import Result
 
 
 class EchoAppContext(Context):
