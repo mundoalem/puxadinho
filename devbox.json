@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.7/.schema/devbox.schema.json",
+  "packages": ["pdm@latest", "go-task@latest", "ruff@latest"],
+  "shell": {
+    "scripts": {
+      "lint": ["task lint"],
+      "scan": ["task scan"],
+      "setup": ["task setup"],
+      "test": ["task test"]
+    }
+  }
+}

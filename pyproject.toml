@@ -1,0 +1,29 @@
+[project]
+name = "teenycli"
+version = "0.1.0"
+description = "A teeny tiny framework to build CLI apps and system services."
+authors = [{ name = "Egon Braun", email = "egon@mundoalem.io" }]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "GPLv3" }
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+tests = []
+skips = [
+  "B101", # Use of assert detected
+]
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+test = ["tox>=4.23.2"]
+scan = ["bandit>=1.7.10"]
+lint = ["ruff>=0.8.0"]
+dev = ["pytest>=8.3.3"]

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "jetpack-io.devbox",
+    "EditorConfig.EditorConfig",
+    "tamasfe.even-better-toml",
+    "yzhang.markdown-all-in-one",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "charliermarsh.ruff"
+  ]
+}

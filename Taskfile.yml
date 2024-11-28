@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  lint:
+    cmds:
+      - pdm install -G lint
+      - pdm run ruff check --fix
+  scan:
+    cmds:
+      - pdm install -G scan
+      - pdm run bandit -c pyproject.toml -r src/
+  setup:
+    cmds:
+      - pdm python install 3.13
+      - pdm python install 3.12
+      - pdm python install 3.11
+      - pdm venv create --force 3.13
+      - pdm install --dev
+      - pdm install -G test
+      - pdm install
+  test:
+    cmds:
+      - pdm install -G test
+      - pdm run tox run-parallel
